@@ -7,7 +7,13 @@ Built with Flask.
 To get started add an environment variable in the `backend/` directory as such.
 
 ```bash
-export FLASK_APP=run.py
+export FLASK_APP=app
+```
+
+To start the server in development mode:
+
+```bash
+export FLASK_ENV=development
 ```
 
 ## Starting the Server
