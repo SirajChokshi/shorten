@@ -1,8 +1,8 @@
 import sqlite3
 import re
-import gen_words
+from . import gen_words
 
-DATABASE = 'links.db'
+DATABASE = './app/links.db'
 
 # returns True if the received url <string> is a valid URL, else returns False
 def is_url_valid(url):
