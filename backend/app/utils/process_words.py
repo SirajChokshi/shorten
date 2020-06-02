@@ -2,7 +2,7 @@ import time
 import requests
 import random
 
-LIST_SIZES = 500
+LIST_SIZES = 1000
 
 PROFANITY_WORDLIST_URL = 'https://raw.githubusercontent.com/snguyenthanh/better_profanity/master/better_profanity/profanity_wordlist.txt'
 PROFANITY_WORDLIST = requests.get(PROFANITY_WORDLIST_URL, allow_redirects=True).content.decode().split('\n')[:-1]
