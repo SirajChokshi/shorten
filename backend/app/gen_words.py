@@ -31,9 +31,6 @@ def gen_index():
     verb_index = random.randrange(0, LIST_SIZE) + 1
     return noun_index, adverb_index, verb_index
 
-def is_duplicate():
-    pass
-
 def gen_words():
     n, a, v = gen_index()
     return get_words(n,a,v)
