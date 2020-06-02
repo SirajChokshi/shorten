@@ -5,7 +5,7 @@ import sqlite3
 
 # # print(process_words.test())
 
-# conn = sqlite3.connect('../words.db')
+# conn = sqlite3.connect('/app/words.db')
 
 # c = conn.cursor()
 
