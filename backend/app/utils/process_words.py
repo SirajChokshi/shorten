@@ -35,9 +35,9 @@ def genList(file):
     return output
 
 def test():
-    nouns = genList('static/index.noun')
-    adv = genList('static/index.adv')
-    verbs = genList('static/index.verb')
+    nouns = genList('../static/index.noun')
+    adv = genList('../static/index.adv')
+    verbs = genList('../static/index.verb')
 
     for j in range(0, LIST_SIZES):
         print(nouns[j], adv[j], verbs[j] + 's')
