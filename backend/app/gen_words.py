@@ -7,7 +7,7 @@ VERBS = 'verbs'
 LIST_SIZE = 1000
 
 def get_words(noun_index, adverb_index, verb_index):
-    db = sqlite3.connect('words.db')
+    db = sqlite3.connect('./app/words.db')
     c = db.cursor()
 
     phrase = ""
@@ -19,10 +19,9 @@ def get_words(noun_index, adverb_index, verb_index):
     }
 
     for tag in tags:
-        c.execute("SELECT * FROM {} WHERE rowid={}".format(tag, tags[tag]))
+        c.execute("SELECT * FROM '{}' WHERE rowid={}".format(tag, tags[tag]))
         phrase += c.fetchone()[0] + "-"
     db.close()
-
     return phrase[:-1]
 
 def gen_index():

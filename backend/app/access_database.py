@@ -4,7 +4,7 @@ from . import gen_words
 
 DATABASE = './app/links.db'
 
-# returns True if the received url <string> is a valid URL, else returns False
+# returns True <bool> if the received url <string> is a valid URL, else returns False <bool>
 def is_url_valid(url):
     REGEX_URL = re.compile(
         r'^(?:http|ftp)s?://' # http:// or https://
@@ -15,7 +15,7 @@ def is_url_valid(url):
         r'(?:/?|[/?]\S+)$', re.IGNORECASE)
     return (re.match(REGEX_URL, url) is not None)
 
-# returns True if the received code <string> exists in a row in the links table, else False
+# returns True <bool> if the received code <string> exists in a row in the links table, else False <bool>
 def is_code_used(code):
     links_db = sqlite3.connect(DATABASE)
     cur = links_db.cursor()
@@ -29,11 +29,11 @@ def is_code_used(code):
         return -1
 
 # adds received url <string> and code <string> as a row in the links table
-# return 0 on success, returns -1 if URL is invalid, returns -2 if code exists in db
+# return the entry's final code <string> on success, returns -1 <int> if URL is invalid, returns -2 <int> if code exists in db
 def add_entry(url, code = -1):
     if code == -1:
         code = gen_words.gen_words()
-        while not is_code_used(code):
+        while is_code_used(code):
             code = gen_words.gen_words()
     if is_url_valid(url):
         if not is_code_used(code):
@@ -42,13 +42,13 @@ def add_entry(url, code = -1):
             cur.execute("INSERT INTO links VALUES ('{}','{}')".format(code.lower(), url))
             links_db.commit()
             links_db.close()
-            return 0
+            return code
         else:
             return -2
     else:
         return -1
 
-# returns entry for the received code, returns -1 if code is not present in database
+# returns entry for the received code <string>, returns -1 <int> if code is not present in database
 def get_entry(code):
     links_db = sqlite3.connect(DATABASE)
     cur = links_db.cursor()

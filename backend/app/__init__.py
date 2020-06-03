@@ -1,11 +1,26 @@
-from flask import Flask, redirect
+from flask import Flask, redirect, render_template, request
 from . import access_database
 
 app = Flask(__name__)
 
 @app.route("/")
-def hello():
-    return "Hello, World!"
+def home():
+    return render_template('index.html', result = -3)
+
+@app.route("/privacy")
+def privacy():
+    return render_template('privacy.html')
+
+@app.route('/', methods=['POST'])
+def handle_data():
+    url = request.form['url']
+    code = request.form['code']
+    output = -5
+    if len(code) < 1:
+        output = access_database.add_entry(url)
+    else:
+        output = access_database.add_entry(url, code)
+    return render_template('index.html', result = output)
 
 @app.route("/<code>")
 def redirect_from_code(code):
@@ -13,8 +28,8 @@ def redirect_from_code(code):
     if destination != -1:
         return redirect(destination)
     else:
-        return redirect("/notfound")
+        return redirect("/404")
 
-@app.route("/notfound")
+@app.route("/404")
 def not_found():
     return "This shortened link has not yet been created."

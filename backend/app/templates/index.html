@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="home">
+    <h2>Create a short URL</h2>
+    <p>This website was built with Python via the Flask framework.</p>
+    <form action="{{ url_for('handle_data') }}" method="post">
+        <input type="text" name="url" placeholder="e.g. https://google.com" required />
+        <input type="text" name="code" placeholder="custom code" />
+        <button type="submit">Create Short URL</button>
+    </form>
+    {% if result == -1 %}
+    <p style="color: red">Invalid URL.</p>
+    {% elif result == -2 %}
+    <p style="color: red">This alias is already in use.</p>
+    {% elif result != -3 %}
+    <p><a style="color: blue">website.com/{{ result }}</a></p>
+    {% endif %}
+  </div>
+  <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
+{% endblock %}
