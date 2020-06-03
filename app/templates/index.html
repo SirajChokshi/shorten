@@ -5,7 +5,7 @@
     <p>Enter a URL you would like a short, easy-to-remember alias for.</p>
     <form action="{{ url_for('handle_data') }}" method="post">
       <div id="action-bar">
-        <input type="text" name="url" placeholder="e.g. https://google.com" required /><button type="submit" data-hover="→"><div>Shorten</div></button>
+        <input type="url" oninvalid="this.setCustomValidity('Enter a valid URL (starting with http:// or https://)')" oninput="this.setCustomValidity('')" name="url" placeholder="e.g. https://google.com" required /><button type="submit" data-hover="→"><div>Shorten</div></button>
       </div>
         <input type="text" style="display: none" name="code" placeholder="custom code" />
     </form>
