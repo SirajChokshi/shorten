@@ -26,7 +26,7 @@
       document.getElementById("action-bar").className = "alias-error"
     </script>
     {% elif result != -3 %}
-    <div class="success"><p>Shortened <a rel="noreferrer noopener" href={{ url }}>{{ url }}</a> to <a href={{ "http://127.0.0.1:5000/" + result }} id="short-url">http://127.0.0.1:5000/{{ result }}</a></p><button id="copy"><i class="gg-clipboard"></i> <span id="copy-inner">Copy</span></button></div>
+    <div class="success"><p>Shortened <a rel="noreferrer noopener" href={{ url }}>{{ url }}</a> to <a href={{ "https://s5n.herokuapp.com/" + result }} id="short-url">s5n.herokuapp.com/{{ result }}</a></p><button id="copy"><i class="gg-clipboard"></i> <span id="copy-inner">Copy</span></button></div>
     <script>
       function copyToClipboard(value) {
         var tempInput = document.createElement("input");
