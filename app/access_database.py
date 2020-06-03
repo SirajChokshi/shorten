@@ -28,18 +28,22 @@ def is_code_used(code):
     except:
         return -1
 
+# checks if the url is already stored in the 
+
 # adds received url <string> and code <string> as a row in the links table
 # return the entry's final code <string> on success, returns -1 <int> if URL is invalid, returns -2 <int> if code exists in db
 def add_entry(url, code = -1):
+    code_auto_generated = 0
     if code == -1:
         code = gen_words.gen_words()
+        code_auto_generated = 1
         while is_code_used(code):
             code = gen_words.gen_words()
     if is_url_valid(url):
         if not is_code_used(code):
             links_db = sqlite3.connect(DATABASE)
             cur = links_db.cursor()
-            cur.execute("INSERT INTO links VALUES ('{}','{}')".format(code.lower(), url))
+            cur.execute("INSERT INTO links VALUES ('{}','{}','{}')".format(code.lower(), url, code_auto_generated))
             links_db.commit()
             links_db.close()
             return code
