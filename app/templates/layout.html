@@ -5,22 +5,29 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
   </head>
   <body>
-    <header>
+    <div class="content">
+      <header>
+        <div class="container">
+          <h1 class="logo">URL Shortener</h1>
+        </div>
+      </header>
       <div class="container">
-        <h1 class="logo">Web app</h1>
+        {% block content %}
+        {% endblock %}
       </div>
-    </header>
-    <div class="container">
-      {% block content %}
-      {% endblock %}
     </div>
     <footer>
-      <strong><nav>
-        <ul class="menu">
+      <div class="container">
+        <ul>
+          <li>Resources</li>
           <li><a href="{{ url_for('home') }}">Home</a></li>
           <li><a href="{{ url_for('privacy') }}">Privacy Policy</a></li>
         </ul>
-      </nav></strong>
+        <ul>
+          <li>About</li>
+          <li>Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores laboriosam voluptatibus unde impedit ex ea hic eius perferendis ad enim! Fugiat, laboriosam sint! Provident natus odit, vel suscipit eligendi expedita.</li>
+        </ul>
+      </div>
     </footer>
   </body>
 </html>

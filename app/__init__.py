@@ -25,7 +25,7 @@ def handle_data():
         output = access_database.add_entry(url)
     else:
         output = access_database.add_entry(url, code)
-    return render_template('index.html', result = output)
+    return render_template('index.html', result = output, url = url)
 
 # redirects to the page that is linked to the code. if the code has not been 
 # paired, redirects to the 404 page.

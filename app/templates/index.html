@@ -1,24 +1,61 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="home">
+  <main>
     <h2>Create a short URL</h2>
-    <p>This website was built with Python via the Flask framework.</p>
+    <p>Enter a URL you would like a short, easy-to-remember alias for.</p>
     <form action="{{ url_for('handle_data') }}" method="post">
-        <input type="text" name="url" placeholder="e.g. https://google.com" required />
-        <input type="text" name="code" placeholder="custom code" />
-        <button type="submit">Create Short URL</button>
+      <div id="action-bar">
+        <input type="text" name="url" placeholder="e.g. https://google.com" required /><button type="submit" data-hover="→"><div>Shorten</div></button>
+      </div>
+        <input type="text" style="display: none" name="code" placeholder="custom code" />
     </form>
     {% if result == -1 %}
-    <p style="color: red">Invalid URL.</p>
+    <p class="error">
+      Invalid URL.
+      <button onClick="closeErrors();">&times;</button>
+    </p>
+    <script>
+      document.getElementById("action-bar").className = "url-error"
+    </script>
     {% elif result == -2 %}
-    <p style="color: red">This alias is already in use.</p>
+    <p class="error">
+      This alias is already in use.
+      <button onClick="closeErrors();">&times;</button>
+    </p>
+    <script>
+      document.getElementById("action-bar").className = "alias-error"
+    </script>
     {% elif result != -3 %}
-    <p><a style="color: blue">website.com/{{ result }}</a></p>
+    <div class="success"><p>Shortened <a rel="noreferrer noopener" href={{ url }}>{{ url }}</a> to <a href={{ "http://127.0.0.1:5000/" + result }} id="short-url">http://127.0.0.1:5000/{{ result }}</a></p><button id="copy"><i class="gg-clipboard"></i> <span id="copy-inner">Copy</span></button></div>
+    <script>
+      function copyToClipboard(value) {
+        var tempInput = document.createElement("input");
+        tempInput.value = value;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand("copy");
+        document.body.removeChild(tempInput);
+      }
+
+       document.querySelector('#copy').onclick = function() {
+        const val = document.getElementById("short-url").innerText
+        copyToClipboard(val);
+        document.getElementsByClassName("gg-clipboard")[0].className = "gg-check-o";
+        document.getElementById('copy-inner').innerText = "Copied!"
+      }
+    </script>
     {% endif %}
-  </div>
+  </main>
   <script>
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
-    </script>
+
+    function closeErrors() {
+      const errors = document.getElementsByClassName("error")
+      for (error of errors) {
+        error.style.display = 'none';
+      }
+    }
+  </script>
 {% endblock %}
