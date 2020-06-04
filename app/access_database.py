@@ -28,7 +28,9 @@ def is_code_used(code):
     except:
         return -1
 
-# checks if the url is already stored in the 
+# checks if the url is already stored in the database
+def does_url_exist(url):
+    pass
 
 # adds received url <string> and code <string> as a row in the links table
 # return the entry's final code <string> on success, returns -1 <int> if URL is invalid, returns -2 <int> if code exists in db
