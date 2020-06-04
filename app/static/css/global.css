@@ -218,6 +218,10 @@ footer ul:nth-child(2) li:nth-child(2) {
     opacity: 0.6;
 }
 
+footer ul:nth-child(2) a {
+    text-decoration: underline;
+}
+
 footer ul li a {
     color: white;
     text-decoration: none;
