@@ -2,11 +2,22 @@
 <html>
   <head>
     <title>URL Shortener</title>
+    <style>
+      .hidden {
+        display: none;
+      }
+      #content-wrap {
+        -webkit-transition: opacity 0.2s ease-in;
+        -moz-transition: opacity 0.2s ease-in;
+        -o-transition: opacity 0.2s ease-in;
+        -ms-transition: opacity 0.2s ease-in;
+        transition: opacity 0.2s ease-in;
+      }
+    </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
   </head>
-  <body>
-    <div class="content">
+  <body id="body" class="hidden">
+    <div class="content" id="content-wrap" style="opacity: 0">
       <header>
         <main>
           <h1 class="logo">URL Shortener</h1>
@@ -32,4 +43,8 @@
       </div>
     </footer>
   </body>
+  <script>
+    document.getElementById("body").classList = "";
+    window.setTimeout(() => document.getElementById("content-wrap").style.opacity = 1, 0)
+  </script>
 </html>

@@ -8,7 +8,7 @@ app = Flask(__name__)
 # homepage
 @app.route("/")
 def home():
-    return render_template('index.html', result = -3, code = "")
+    return render_template('index.html', result = -3)
 
 # terms of use
 @app.route("/terms")
@@ -25,7 +25,7 @@ def handle_data():
         output = access_database.add_entry(url)
     else:
         output = access_database.add_entry(url, code)
-    return render_template('index.html', result = output, url = url, code = "")
+    return render_template('index.html', result = output, url = url)
 
 # redirects to the page that is linked to the code. if the code has not been 
 # paired, aborts with a HTTP status 404.

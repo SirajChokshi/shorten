@@ -9,9 +9,6 @@
       </div>
       <span>Optionally, use a custom alias:<br /><span>https://s5n.herokuapp.com/ <input type="text" name="code" id="custom-alias" placeholder="custom-alias" /></span></span>
     </form>
-    <script>
-      document.getElementById('custom-alias').value = {{ code }}
-    </script>
     {% if result == -1 %}
     <p class="error">
       Invalid URL.
