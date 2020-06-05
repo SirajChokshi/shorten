@@ -3,13 +3,14 @@
   <head>
     <title>URL Shortener</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap">
   </head>
   <body>
     <div class="content">
       <header>
-        <div class="container">
+        <main>
           <h1 class="logo">URL Shortener</h1>
-        </div>
+        </main>
       </header>
       <div class="container">
         {% block content %}

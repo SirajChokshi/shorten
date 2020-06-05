@@ -7,8 +7,11 @@
       <div id="action-bar">
         <input type="url" oninvalid="this.setCustomValidity('Enter a valid URL (starting with http:// or https://)')" oninput="this.setCustomValidity('')" name="url" placeholder="e.g. https://google.com" required /><button type="submit" data-hover="→"><div>Shorten</div></button>
       </div>
-      <span>Optionally, use a custom alias:<br /><span>https://s5n.herokuapp.com/ <input type="text" name="code" placeholder="custom-alias" /></span></span>
+      <span>Optionally, use a custom alias:<br /><span>https://s5n.herokuapp.com/ <input type="text" name="code" id="custom-alias" placeholder="custom-alias" /></span></span>
     </form>
+    <script>
+      document.getElementById('custom-alias').value = {{ code }}
+    </script>
     {% if result == -1 %}
     <p class="error">
       Invalid URL.
