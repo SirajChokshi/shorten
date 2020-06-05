@@ -12,7 +12,7 @@ def home():
 
 # privacy policy
 @app.route("/terms")
-def privacy():
+def terms():
     return render_template('terms.html')
 
 # handle link creation
