@@ -11,9 +11,9 @@ def home():
     return render_template('index.html', result = -3)
 
 # privacy policy
-@app.route("/privacy")
+@app.route("/terms")
 def privacy():
-    return render_template('privacy.html')
+    return render_template('terms.html')
 
 # handle link creation
 @app.route('/', methods=['POST'])
