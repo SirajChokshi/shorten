@@ -1,5 +1,5 @@
 # 3rd party imports
-from flask import Flask, redirect, render_template, request, abort
+from flask import Flask, redirect, render_template, request, abort, jsonify
 # local imports
 from . import access_database
 
@@ -44,3 +44,23 @@ def page_not_found(e):
 
 # register the error handler with flask
 app.register_error_handler(404, page_not_found)
+
+'''
+api endpoint for creating a new shortened link
+returns the the created link if successful, or an error code from access_database.add_entry()
+'''
+@app.route("/api/create", methods=['POST'])
+def handle_api_data():
+    input_url = request.args.get("url")
+    input_code = request.args.get("code")
+
+    # if the code is invalid, sets the code to the default value so add_entry generates a code
+    if(input_code == None or len(input_code) == 0):
+        input_code = -1
+
+    final_code = access_database.add_entry(input_url,input_code)
+    # if successfuly shortened, return the short link
+    if(isinstance(final_code, str)):
+        final_url = request.url_root + final_code
+
+    return jsonify(shortenedUrl=final_url)
