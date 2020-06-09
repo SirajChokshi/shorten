@@ -54,13 +54,13 @@ def handle_api_data():
     input_url = request.args.get("url")
     input_code = request.args.get("code")
 
-    # if the code is invalid, sets the code to the default value so add_entry generates a code
-    if(input_code == None or len(input_code) == 0):
+    # if no code is inputted, sets the code to the default value so add_entry generates a code
+    if(input_code == None):
         input_code = -1
 
-    final_code = access_database.add_entry(input_url,input_code)
+    final_url = access_database.add_entry(input_url,input_code)
     # if successfuly shortened, return the short link
-    if(isinstance(final_code, str)):
-        final_url = request.url_root + final_code
+    if(isinstance(final_url, str)):
+        final_url = request.url_root + final_url
 
     return jsonify(shortenedUrl=final_url)
