@@ -10,6 +10,7 @@ HOST = "https://s5n.herokuapp.com"
 @click.option('-a', '--alias', default=None, help='optional custom alias')
 @click.option('-c', '--copy', is_flag=True, help='copy shortened URL to clipboard')
 def getShortURL(url, alias, copy):
+    """Generate a shortened address from the given URL. A valid URL begins with 'http(s)://.'""" 
 
     req = None
  
