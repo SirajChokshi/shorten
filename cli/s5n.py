@@ -7,9 +7,9 @@ HOST = "https://s5n.herokuapp.com"
 
 @click.command()
 @click.argument('url')
-@click.option('--alias', default=None, help='optional custom alias')
-@click.option('--c', is_flag=True, help='copy shortened URL to clipboard')
-def getShortURL(url, alias, c):
+@click.option('-a', '--alias', default=None, help='optional custom alias')
+@click.option('-c', '--copy', is_flag=True, help='copy shortened URL to clipboard')
+def getShortURL(url, alias, copy):
 
     req = None
  
@@ -31,7 +31,7 @@ def getShortURL(url, alias, c):
             click.secho("\n⚠ Unexpected Error", fg="red", bold=True)
     else:
         click.echo("\n" + click.style("Your shortened URL → ", fg="white", bold=True) + click.style(res["shortenedUrl"], fg='magenta', underline=True))
-        if c:
+        if copy:
             pyperclip.copy(res["shortenedUrl"])
             click.secho("✔ Copied to Clipboard!", fg='green')
 
