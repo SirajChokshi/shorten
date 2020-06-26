@@ -35,11 +35,34 @@ def is_code_used(code):
     except:
         return -1
 
+# returns True <bool> if the exact received url <string> exists in a row in the 
+# links table and is mapped to a non-custom code, else False <bool>
+def url_randomly_shortened(url):
+    links_db = sqlite3.connect(DATABASE)
+    cur = links_db.cursor()
+    cur.execute("SELECT EXISTS(SELECT 1 FROM links WHERE url='{}' AND code_auto_generated=1)".format(url))
+    out = cur.fetchone()
+    links_db.commit()
+    links_db.close()
+    return bool(out[0])
+
+# returns the randomly generate code <string> for the given url. If there 
+# are multiple entries, the one that is added earliest is returned.
+def get_url_code(url):
+    links_db = sqlite3.connect(DATABASE)
+    cur = links_db.cursor()
+    cur.execute("SELECT code FROM links WHERE url='{}' AND code_auto_generated=1 LIMIT 1".format(url))
+    out = cur.fetchone()
+    links_db.commit()
+    links_db.close
+    return out[0]
+
 # adds received url <string> and code <string> as a row in the links table
 # return the entry's final code <string> on success, returns -1 <int> if URL is 
 # invalid, returns -2 <int> if code exists in db, returns -3 <int> if code is not valid
 def add_entry(url, code = -1):
     code_auto_generated = 0
+    # generate a random code if no code is given
     if code == -1:
         code = gen_words.gen_words()
         while is_code_used(code):
@@ -49,12 +72,15 @@ def add_entry(url, code = -1):
     if is_url_valid(url):
         if is_code_valid(code):
             if not is_code_used(code):
-                links_db = sqlite3.connect(DATABASE)
-                cur = links_db.cursor()
-                cur.execute("INSERT INTO links VALUES ('{}','{}','{}')".format(code.lower(), url, code_auto_generated))
-                links_db.commit()
-                links_db.close()
-                return code
+                if not url_randomly_shortened(url): # check if a random code has already been generated
+                    links_db = sqlite3.connect(DATABASE)
+                    cur = links_db.cursor()
+                    cur.execute("INSERT INTO links VALUES ('{}','{}','{}')".format(code.lower(), url, code_auto_generated))
+                    links_db.commit()
+                    links_db.close()
+                    return code
+                else:
+                    return get_url_code(url)
             else:
                 return -2
         else:
