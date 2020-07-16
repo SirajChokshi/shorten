@@ -130,3 +130,6 @@ dmypy.json
 
 # Misc
 .DS_Store
+
+# vscode project settings
+.vscode/
