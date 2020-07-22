@@ -4,8 +4,20 @@
 }  
 
 :root {
-    font-size: 18px;
+    font-size: 30px;
     color: white;
+}
+
+@media (min-width: 375px) {
+    :root{
+        font-size: calc(30px + (18 - 30) * ((100vw - 375px) / (1080 - 375)));
+    }
+}
+
+@media (min-width: 1080px) {
+    :root {
+        font-size: 18px;
+    }
 }
 
 /* PAGE */
