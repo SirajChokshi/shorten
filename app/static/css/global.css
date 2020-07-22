@@ -10,11 +10,11 @@
 
 @media (min-width: 375px) {
     :root{
-        font-size: calc(30px + (18 - 30) * ((100vw - 375px) / (1080 - 375)));
+        font-size: calc(30px + (18 - 30) * ((100vw - 375px) / (1920 - 375)));
     }
 }
 
-@media (min-width: 1080px) {
+@media (min-width: 1920px) {
     :root {
         font-size: 18px;
     }
